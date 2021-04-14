@@ -1,6 +1,9 @@
 {
   "name": "scribble_api",
   "version": "1.0.0",
+  "engines": {
+    "node": "14.15.1"
+  },
   "description": "a REST API for a note taking/saving app",
   "main": "app.js",
   "author": "victor orlunda",
