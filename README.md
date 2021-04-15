@@ -50,13 +50,21 @@ To use this API for your project(s), perform the following steps:
 
 - clone this repo to your machine
 
-- run **yarn install:* or :*npm install** to install the (dev)dependencies
+- run **yarn install** or **npm install** to install the (dev)dependencies
 
 - create a **.env** file and populate it with the following variables *DB_STRING*, *PORT* and *SECRET_KEY* 
 
 - run **yarn dev** or **npm run dev**
 
 - open up postman or a browser and visit http://localhost:PORT to test run the API
+
+## Notes on authentication/authorization and **CORS**
+
+When a user logs in via the **/api/login** route, a **JWT**oken in the form of `<` Bearer *token*`>` is returned in the response object
+
+This token must be included in the **Authorization** header of subsequent requests to protected routes of the API which are essentially **/api/users** and **/api/notes**
+
+For **CORS**, it is up to **you** to install the module and configure it for your specific use case(s)
 
 ## License
 
