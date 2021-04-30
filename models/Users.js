@@ -26,8 +26,6 @@ const usersSchema = new Schema({
     required: true,
   },
 
-  notes: [{ type: Schema.Types.ObjectId, ref: 'Note' }],
-
   date_joined: {
     type: Date,
     default: Date.now,
