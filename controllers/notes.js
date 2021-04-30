@@ -61,8 +61,6 @@ const createNote = async (req, res) => {
       tags,
     });
 
-    await User.updateOne({ _id: userId }, { $push: { notes: newNote._id } });
-
     res.status(201).json({
       message: 'note created',
       note: newNote,
