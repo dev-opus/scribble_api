@@ -7,7 +7,6 @@ const getUsers = async (req, res) => {
       const { pageSize } = req.query;
 
       const users = await User.find({})
-        .populate('notes', '-_id note_text')
         .select('-__v -salt -hash')
         .limit(+pageSize)
         .lean();
@@ -18,7 +17,6 @@ const getUsers = async (req, res) => {
       });
     } else {
       const users = await User.find({})
-        .populate('notes', '-_id note_text')
         .select('-__v -salt -hash')
         .limit(10)
         .lean();
@@ -36,7 +34,6 @@ const getUsers = async (req, res) => {
 const getUserById = async (req, res) => {
   try {
     const user = await User.findById(req.params.id)
-      .populate('notes', '-_id note_text')
       .select('-__v -salt -hash')
       .lean();
 
@@ -65,7 +62,6 @@ const updateUser = async (req, res) => {
 
     if (result.nModified < 1) {
       const user = await User.findOne({ _id: id })
-        .populate('notes', '-_id note_text')
         .select('-__v -salt -hash')
         .lean();
 
