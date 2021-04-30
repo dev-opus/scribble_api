@@ -2,6 +2,7 @@ require('dotenv').config();
 const express = require('express');
 const app = express();
 const port = process.env.PORT || 5000;
+const { handleError } = require('./utils/errorHandler');
 
 // body parsing middleware
 app.use(express.json());
@@ -26,6 +27,12 @@ app.use('*', (req, res) => {
       '/api/notes',
     ],
   });
+});
+
+// generic error handler
+
+app.use((err, req, res, next) => {
+  handleError(err, res);
 });
 
 app.listen(port, () => console.log(`server started on port ${port}`));
