@@ -16,14 +16,16 @@ const usersSchema = new Schema({
     required: true,
   },
 
-  salt: {
-    type: String,
-    required: true,
-  },
+  login_details: {
+    salt: {
+      type: String,
+      required: true,
+    },
 
-  hash: {
-    type: String,
-    required: true,
+    hash: {
+      type: String,
+      required: true,
+    },
   },
 
   date_joined: {
