@@ -84,24 +84,20 @@ const updateUser = async (req, res) => {
 };
 
 const deleteUser = async (req, res) => {
-  try {
-    const { id } = req.params;
+  const { id } = req.params;
 
-    const result = await User.deleteOne({ _id: id });
+  const result = await User.deleteOne({ _id: id });
 
-    if (result.deletedCount !== 1) {
-      return res.status(400).json({
-        notice: 'operation failed',
-        reason: `no user with the id of '${id}' found `,
-      });
-    }
-
-    res.json({
-      message: `deleted one user with the id of '${id}' `,
+  if (result.deletedCount !== 1) {
+    return res.status(400).json({
+      notice: 'operation failed',
+      reason: `no user with the id of '${id}' found `,
     });
-  } catch (error) {
-    serverErrors(res, error);
   }
+
+  res.json({
+    message: `deleted one user with the id of '${id}' `,
+  });
 };
 
 module.exports = { getUsers, getUserById, updateUser, deleteUser };
