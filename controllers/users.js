@@ -7,7 +7,7 @@ const getUsers = async (req, res) => {
       const { pageSize } = req.query;
 
       const users = await User.find({})
-        .select('-__v -salt -hash')
+        .select('-__v -login_details')
         .limit(+pageSize)
         .lean();
 
@@ -17,7 +17,7 @@ const getUsers = async (req, res) => {
       });
     } else {
       const users = await User.find({})
-        .select('-__v -salt -hash')
+        .select('-__v -login_details')
         .limit(10)
         .lean();
 
@@ -34,7 +34,7 @@ const getUsers = async (req, res) => {
 const getUserById = async (req, res) => {
   try {
     const user = await User.findById(req.params.id)
-      .select('-__v -salt -hash')
+      .select('-__v -login_details')
       .lean();
 
     if (!user) {
@@ -62,7 +62,7 @@ const updateUser = async (req, res) => {
 
     if (result.nModified < 1) {
       const user = await User.findOne({ _id: id })
-        .select('-__v -salt -hash')
+        .select('-__v -login_details')
         .lean();
 
       if (!user) {
