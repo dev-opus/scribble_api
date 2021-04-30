@@ -1,4 +1,3 @@
-const serverErrors = require('../utils/errorHandler');
 const { genSaltHash } = require('../utils/password');
 const User = require('../models/Users');
 
@@ -12,21 +11,19 @@ const createUser = async (req, res) => {
   const { email, username, password } = req.body;
   const { salt, hash } = genSaltHash(password);
 
-  try {
-    const user = await User.create({
-      username,
-      email,
+  const user = await User.create({
+    username,
+    email,
+    login_details: {
       salt,
       hash,
-    });
+    },
+  });
 
-    res.status(201).json({
-      message: 'user created',
-      user,
-    });
-  } catch (error) {
-    serverErrors(res, error);
-  }
+  res.status(201).json({
+    message: 'user created',
+    user,
+  });
 };
 
 module.exports = { getIndex, createUser };
