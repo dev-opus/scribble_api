@@ -4,11 +4,15 @@ const catchAsyncErrors = asyncFunc => {
   };
 };
 
-const serverErrors = (res, err) => {
-  res.status(500).json({
-    notice: 'an error occurred',
-    errMsg: err.message,
+const handleError = (err, res) => {
+  const { message } = err;
+  const statusCode = err.statusCode || 500;
+
+  res.status(statusCode).json({
+    status: 'Error',
+    statusCode,
+    message,
   });
 };
 
-module.exports = { serverErrors, catchAsyncErrors };
+module.exports = { handleError, catchAsyncErrors };
