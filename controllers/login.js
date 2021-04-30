@@ -21,7 +21,7 @@ const logUserIn = async (req, res) => {
       });
     }
 
-    const { salt, hash } = user;
+    const { salt, hash } = user.login_details;
 
     const valid = verifyPassword(password, salt, hash);
 
