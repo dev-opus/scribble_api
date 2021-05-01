@@ -97,5 +97,5 @@ module.exports = {
   getNoteById,
   createNote,
   deleteNoteById,
-  getNoteById,
+  getNotesByUserId,
 };
