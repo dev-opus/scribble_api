@@ -7,6 +7,7 @@ const { catchAsyncErrors } = require('../utils/errorHandler');
 const {
   getNotes,
   getNoteById,
+  getNotesByUserId,
   createNote,
   deleteNoteById,
 } = require('../controllers/notes');
@@ -14,6 +15,8 @@ const {
 router.get('/', verifyToken, catchAsyncErrors(getNotes));
 
 router.get('/:id', verifyToken, catchAsyncErrors(getNoteById));
+
+router.get('/', catchAsyncErrors(getNotesByUserId));
 
 router.post('/', verifyToken, sanitizeNote, catchAsyncErrors(createNote));
 
