@@ -40,6 +40,25 @@ const getNoteById = async (req, res) => {
   });
 };
 
+const getNotesByUserId = async (req, res) => {
+  const { id } = req.params;
+
+  const notes = await Note.find({ author: id })
+    .populate('author', 'username -_id')
+    .lean();
+
+  if (!notes)
+    return res.status(404).json({
+      status: '404 Not Found',
+      response: `No notes created by user with id of '${id}' in the database `,
+    });
+
+  res.status(200).json({
+    status: 'Success',
+    response: note,
+  });
+};
+
 const createNote = async (req, res) => {
   const { noteText, tags } = req.body;
   const userId = req.userId;
@@ -73,4 +92,10 @@ const deleteNoteById = async (req, res) => {
   });
 };
 
-module.exports = { getNotes, getNoteById, createNote, deleteNoteById };
+module.exports = {
+  getNotes,
+  getNoteById,
+  createNote,
+  deleteNoteById,
+  getNoteById,
+};
