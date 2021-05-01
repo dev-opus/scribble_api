@@ -16,7 +16,7 @@ router.get('/', verifyToken, catchAsyncErrors(getNotes));
 
 router.get('/:id', verifyToken, catchAsyncErrors(getNoteById));
 
-router.get('/', catchAsyncErrors(getNotesByUserId));
+router.get('/', verifyToken, catchAsyncErrors(getNotesByUserId));
 
 router.post('/', verifyToken, sanitizeNote, catchAsyncErrors(createNote));
 
