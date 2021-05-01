@@ -1,5 +1,4 @@
 const Note = require('../models/Notes');
-const User = require('../models/Users');
 
 const getNotes = async (req, res) => {
   const { pageSize } = req.query;
