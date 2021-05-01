@@ -1,6 +1,7 @@
 const Note = require('../models/Notes');
 
-const getNotes = async (req, res) => {
+const getNotes = async (req, res, next) => {
+  if (req.query.hasOwnProperty('userId')) return next('route');
   const { pageSize } = req.query;
 
   if (!pageSize) {
@@ -41,21 +42,21 @@ const getNoteById = async (req, res) => {
 };
 
 const getNotesByUserId = async (req, res) => {
-  const { id } = req.params;
+  const { userId } = req.query;
 
-  const notes = await Note.find({ author: id })
+  const notes = await Note.find({ author: userId })
     .populate('author', 'username -_id')
     .lean();
 
   if (!notes)
     return res.status(404).json({
       status: '404 Not Found',
-      response: `No notes created by user with id of '${id}' in the database `,
+      response: `No notes created by user with id of '${userId}' in the database `,
     });
 
   res.status(200).json({
     status: 'Success',
-    response: note,
+    response: notes,
   });
 };
 
